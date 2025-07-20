@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Monitoreo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="app-sidebar">
+            <div class="sidebar-header">
+                <span class="logo-text">SM</span>
+                <span class="brand-text">Sistema Monitoreo</span>
+            </div>
+            <nav class="sidebar-menu">
+    <ul>
+        <li>
+            <a href="#dashboard" class="menu-link">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#historial" class="menu-link">
+                <i class="bi bi-clock-history"></i>
+                <span>Historial</span>
+            </a>
+        </li>
+        <li>
+            <a href="#dispositivos" class="menu-link">
+                <i class="bi bi-pc-display"></i>
+                <span>Dispositivos</span>
+            </a>
+        </li>
+        <li>
+            <a href="#configuracion" class="menu-link">
+                <i class="bi bi-gear"></i>
+                <span>Configuración</span>
+            </a>
+        </li>
+        <li>
+            <a href="#lista-negra" class="menu-link">
+                <i class="bi bi-shield-lock"></i>
+                <span>Lista Negra</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">AD</div>
+                    <div class="user-details">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Administrador</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-content">
+            <!-- Top Header -->
+            <!-- Reemplaza la sección del header en tu index.html -->
+<header class="app-header">
+    <button class="menu-toggle">
+        <i class="bi bi-list"></i>
+    </button>
+    <div class="header-actions ms-auto"> <!-- Agregado ms-auto aquí -->
+        <button class="notifications-btn">
+            <i class="bi bi-bell"></i>
+            <span class="badge">3</span>
+        </button>
+        <div class="dropdown">
+            <button class="user-dropdown" data-bs-toggle="dropdown">
+                <span>Admin</span>
+                <i class="bi bi-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end"> <!-- Agregado dropdown-menu-end -->
+                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Perfil</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Configuración</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="login.html" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+            <!-- Content Area -->
+            <div class="content-wrapper">
+                <!-- Dentro de tu div.content-wrapper -->
+<div class="container-fluid">
+    <!-- Sección Dashboard -->
+  <div id="dashboard" class="content-section">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="page-title mb-0">Monitoreo de Red</h4>
+        <div class="d-flex">
+            <select class="form-select form-select-sm me-2" style="width: 180px;">
+                <option>Todos los dispositivos</option>
+                <option selected>Dispositivos activos</option>
+                <option>Dispositivos bloqueados</option>
+            </select>
+            <select class="form-select form-select-sm" style="width: 150px;">
+                <option>Últimas 24h</option>
+                <option selected>Últimos 7 días</option>
+                <option>Últimos 30 días</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Tarjetas de Métricas de Red -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="metric-card bg-primary text-white">
+                <div class="metric-value">58</div>
+                <div class="metric-label">Dispositivos Conectados</div>
+                <div class="metric-change positive">
+                    <i class="bi bi-arrow-up"></i> 5.4%
+                </div>
+                <i class="bi bi-router metric-icon"></i>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="metric-card bg-info text-white">
+                <div class="metric-value">4,287</div>
+                <div class="metric-label">Páginas Visitadas</div>
+                <div class="metric-change negative">
+                    <i class="bi bi-arrow-down"></i> 2.1%
+                </div>
+                <i class="bi bi-globe metric-icon"></i>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="metric-card bg-warning text-dark">
+                <div class="metric-value">326</div>
+                <div class="metric-label">Sitios No Permitidos</div>
+                <div class="metric-change positive">
+                    <i class="bi bi-arrow-up"></i> 15.3%
+                </div>
+                <i class="bi bi-exclamation-octagon metric-icon"></i>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="metric-card bg-danger text-white">
+                <div class="metric-value">24</div>
+                <div class="metric-label">Intentos de Bloqueo</div>
+                <div class="metric-change positive">
+                    <i class="bi bi-arrow-up"></i> 8.7%
+                </div>
+                <i class="bi bi-shield-lock metric-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos y Dispositivos -->
+    <div class="row mb-4">
+        <!-- Gráfico de Tráfico Web -->
+        <div class="col-md-8">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Tráfico Web por Categoría</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Por dispositivo
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Por dispositivo</a></li>
+                            <li><a class="dropdown-item" href="#">Por categoría</a></li>
+                            <li><a class="dropdown-item" href="#">Por minutos</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="webTrafficChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Top Dispositivos -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-white">
+                    <h5 class="card-title mb-0">Dispositivos Más Activos</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-laptop me-3 text-primary"></i>
+                                <div>
+                                    <h6 class="mb-0">WS-1042</h6>
+                                    <small class="text-muted">Oficina Principal</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">1,248 visitas</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-phone me-3 text-info"></i>
+                                <div>
+                                    <h6 class="mb-0">BYOD-User23</h6>
+                                    <small class="text-muted">Personal</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">987 visitas</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-pc-display-horizontal me-3 text-success"></i>
+                                <div>
+                                    <h6 class="mb-0">SRV-MKT-01</h6>
+                                    <small class="text-muted">Marketing</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">856 visitas</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-tablet me-3 text-warning"></i>
+                                <div>
+                                    <h6 class="mb-0">TAB-Executive</h6>
+                                    <small class="text-muted">Gerencia</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">723 visitas</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-laptop me-3 text-danger"></i>
+                                <div>
+                                    <h6 class="mb-0">WS-Admin</h6>
+                                    <small class="text-muted">TI</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">689 visitas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Historial de Navegación -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Historial de Navegación</h5>
+                    <div class="input-group" style="width: 300px;">
+                        <input type="text" class="form-control form-control-sm" placeholder="Buscar dispositivo o URL...">
+                        <button class="btn btn-sm btn-outline-secondary" type="button">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Dispositivo</th>
+                                    <th>URL Visitada</th>
+                                    <th>Categoría</th>
+                                    <th>Fecha/Hora</th>
+                                    <th>Duración</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-laptop me-2 text-primary"></i>
+                                            <span>WS-1042</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="https://www.github.com" target="_blank" class="text-truncate" style="max-width: 200px; display: inline-block;">
+                                            https://www.github.com/repository/project
+                                        </a>
+                                    </td>
+                                    <td><span class="badge bg-info">Tecnología</span></td>
+                                    <td>10/Nov/2023 14:32:15</td>
+                                    <td>12m 45s</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary me-1" title="Bloquear">
+                                            <i class="bi bi-shield-lock"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary" title="Detalles">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-phone me-2 text-info"></i>
+                                            <span>BYOD-User23</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="https://www.youtube.com" target="_blank" class="text-truncate" style="max-width: 200px; display: inline-block;">
+                                            https://www.youtube.com/watch?v=example
+                                        </a>
+                                    </td>
+                                    <td><span class="badge bg-warning">Entretenimiento</span></td>
+                                    <td>10/Nov/2023 13:45:22</td>
+                                    <td>32m 18s</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary me-1">
+                                            <i class="bi bi-shield-lock"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-laptop me-2 text-primary"></i>
+                                            <span>WS-1042</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="https://www.google.com" target="_blank" class="text-truncate" style="max-width: 200px; display: inline-block;">
+                                            https://www.google.com/search?q=monitoring+systems
+                                        </a>
+                                    </td>
+                                    <td><span class="badge bg-success">Buscador</span></td>
+                                    <td>10/Nov/2023 12:30:05</td>
+                                    <td>2m 15s</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary me-1">
+                                            <i class="bi bi-shield-lock"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-tablet me-2 text-warning"></i>
+                                            <span>TAB-Executive</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="https://www.linkedin.com" target="_blank" class="text-truncate" style="max-width: 200px; display: inline-block;">
+                                            https://www.linkedin.com/company/example
+                                        </a>
+                                    </td>
+                                    <td><span class="badge bg-primary">Red Social</span></td>
+                                    <td>10/Nov/2023 11:15:33</td>
+                                    <td>8m 42s</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary me-1">
+                                            <i class="bi bi-shield-lock"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-phone me-2 text-info"></i>
+                                            <span>BYOD-User15</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="https://www.netflix.com" target="_blank" class="text-truncate" style="max-width: 200px; display: inline-block;">
+                                            https://www.netflix.com/watch/example
+                                        </a>
+                                    </td>
+                                    <td><span class="badge bg-danger">Bloqueado</span></td>
+                                    <td>10/Nov/2023 10:05:47</td>
+                                    <td>0m 12s</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary me-1">
+                                            <i class="bi bi-shield-lock"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination pagination-sm justify-content-center mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Siguiente</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Sección Historial -->
+    <div id="historial" class="content-section">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="page-title">Historial de Actividad</h4>
+            <div class="d-flex">
+                <div class="input-group me-3" style="width: 250px;">
+                    <input type="date" class="form-control form-control-sm" id="fechaInicio">
+                    <span class="input-group-text">a</span>
+                    <input type="date" class="form-control form-control-sm" id="fechaFin">
+                </div>
+                <select class="form-select form-select-sm me-2" style="width: 180px;">
+                    <option selected>Todos los eventos</option>
+                    <option>Conexiones</option>
+                    <option>Intentos de bloqueo</option>
+                    <option>Alertas de seguridad</option>
+                </select>
+                <button class="btn btn-sm btn-primary">
+                    <i class="bi bi-funnel"></i> Filtrar
+                </button>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Resumen de Actividad</h5>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Últimos 7 días
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Últimas 24 horas</a></li>
+                        <li><a class="dropdown-item" href="#">Últimos 7 días</a></li>
+                        <li><a class="dropdown-item" href="#">Últimos 30 días</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Personalizado</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="activityTimelineChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Registros Detallados</h5>
+                <div class="input-group" style="width: 300px;">
+                    <input type="text" class="form-control form-control-sm" placeholder="Buscar dispositivo o evento...">
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Fecha/Hora</th>
+                                <th>Dispositivo</th>
+                                <th>Tipo de Evento</th>
+                                <th>Descripción</th>
+                                <th>Dirección IP</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>15/Nov/2023 08:32:15</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-laptop me-2 text-primary"></i>
+                                        <span>WS-1042</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-primary">Conexión</span></td>
+                                <td>Dispositivo conectado a la red</td>
+                                <td>192.168.1.45</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary" title="Detalles">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15/Nov/2023 08:15:42</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-phone me-2 text-info"></i>
+                                        <span>BYOD-User23</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-danger">Bloqueo</span></td>
+                                <td>Intento de acceso a sitio bloqueado</td>
+                                <td>192.168.1.78</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary" title="Detalles">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15/Nov/2023 07:58:33</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-pc-display-horizontal me-2 text-success"></i>
+                                        <span>SRV-MKT-01</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-warning">Alerta</span></td>
+                                <td>Tráfico inusual detectado</td>
+                                <td>192.168.1.112</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary" title="Detalles">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>14/Nov/2023 22:15:07</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-tablet me-2 text-warning"></i>
+                                        <span>TAB-Executive</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-success">Actualización</span></td>
+                                <td>Políticas de seguridad actualizadas</td>
+                                <td>192.168.1.65</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary" title="Detalles">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>14/Nov/2023 18:42:56</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-laptop me-2 text-danger"></i>
+                                        <span>WS-Admin</span>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-info">Configuración</span></td>
+                                <td>Regla de firewall modificada</td>
+                                <td>192.168.1.2</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary" title="Detalles">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer bg-white">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination pagination-sm justify-content-center mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Sección Dispositivos -->
+<div id="dispositivos" class="content-section">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="page-title">Gestión de Dispositivos</h4>
+            <div class="d-flex">
+                <select class="form-select form-select-sm me-2" style="width: 180px;">
+                    <option selected>Todos los dispositivos</option>
+                    <option>Conectados ahora</option>
+                    <option>Autorizados</option>
+                    <option>No autorizados</option>
+                    <option>Bloqueados</option>
+                </select>
+                <button class="btn btn-sm btn-primary me-2">
+                    <i class="bi bi-plus-circle"></i> Agregar dispositivo
+                </button>
+                <button class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-download"></i> Exportar
+                </button>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="metric-card bg-primary text-white">
+                    <div class="metric-value" id="total-devices">0</div>
+                    <div class="metric-label">Dispositivos Totales</div>
+                    <div class="metric-change positive">
+                        <i class="bi bi-arrow-up"></i> <span id="device-trend">0</span>%
+                    </div>
+                    <i class="bi bi-devices metric-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card bg-success text-white">
+                    <div class="metric-value" id="connected-devices">0</div>
+                    <div class="metric-label">Conectados Ahora</div>
+                    <div class="metric-change positive">
+                        <i class="bi bi-arrow-up"></i> <span id="connected-trend">0</span>%
+                    </div>
+                    <i class="bi bi-wifi metric-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card bg-warning text-dark">
+                    <div class="metric-value" id="unauthorized-devices">0</div>
+                    <div class="metric-label">No Autorizados</div>
+                    <div class="metric-change negative">
+                        <i class="bi bi-arrow-down"></i> <span id="unauthorized-trend">0</span>%
+                    </div>
+                    <i class="bi bi-exclamation-triangle metric-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card bg-danger text-white">
+                    <div class="metric-value" id="blocked-devices">0</div>
+                    <div class="metric-label">Bloqueados</div>
+                    <div class="metric-change positive">
+                        <i class="bi bi-arrow-up"></i> <span id="blocked-trend">0</span>%
+                    </div>
+                    <i class="bi bi-shield-lock metric-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Distribución de Dispositivos</h5>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Por tipo
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Por tipo</a></li>
+                                <li><a class="dropdown-item" href="#">Por sistema operativo</a></li>
+                                <li><a class="dropdown-item" href="#">Por departamento</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="devicesDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4 h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Tipos de Dispositivos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="devicesTypeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Lista de Dispositivos</h5>
+                <div class="input-group" style="width: 300px;">
+                    <input type="text" class="form-control form-control-sm" placeholder="Buscar dispositivo...">
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Dirección MAC</th>
+                                <th>Dirección IP</th>
+                                <th>Tipo</th>
+                                <th>Sistema Operativo</th>
+                                <th>Estado</th>
+                                <th>Última Conexión</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-laptop me-2 text-primary"></i>
+                                        <span>WS-1042</span>
+                                    </div>
+                                </td>
+                                <td>00:1A:2B:3C:4D:5E</td>
+                                <td>192.168.1.45</td>
+                                <td>Laptop</td>
+                                <td>Windows 10</td>
+                                <td><span class="badge bg-success">Conectado</span></td>
+                                <td>Hace 5 min</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="bi bi-gear"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle"></i> Detalles</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-shield-lock"></i> Bloquear</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-phone me-2 text-info"></i>
+                                        <span>BYOD-User23</span>
+                                    </div>
+                                </td>
+                                <td>00:1A:2B:3C:4D:5F</td>
+                                <td>192.168.1.78</td>
+                                <td>Teléfono</td>
+                                <td>Android 12</td>
+                                <td><span class="badge bg-success">Conectado</span></td>
+                                <td>Hace 12 min</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="bi bi-gear"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle"></i> Detalles</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-shield-lock"></i> Bloquear</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-pc-display-horizontal me-2 text-success"></i>
+                                        <span>SRV-MKT-01</span>
+                                    </div>
+                                </td>
+                                <td>00:1A:2B:3C:4D:60</td>
+                                <td>192.168.1.112</td>
+                                <td>Servidor</td>
+                                <td>Windows Server 2019</td>
+                                <td><span class="badge bg-success">Conectado</span></td>
+                                <td>Hace 2 horas</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="bi bi-gear"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle"></i> Detalles</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-shield-lock"></i> Bloquear</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-tablet me-2 text-warning"></i>
+                                        <span>TAB-Executive</span>
+                                    </div>
+                                </td>
+                                <td>00:1A:2B:3C:4D:61</td>
+                                <td>192.168.1.65</td>
+                                <td>Tablet</td>
+                                <td>iOS 15</td>
+                                <td><span class="badge bg-secondary">Desconectado</span></td>
+                                <td>Ayer, 14:32</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="bi bi-gear"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle"></i> Detalles</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-shield-lock"></i> Bloquear</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-laptop me-2 text-danger"></i>
+                                        <span>WS-Admin</span>
+                                    </div>
+                                </td>
+                                <td>00:1A:2B:3C:4D:62</td>
+                                <td>192.168.1.2</td>
+                                <td>Laptop</td>
+                                <td>Windows 11</td>
+                                <td><span class="badge bg-danger">Bloqueado</span></td>
+                                <td>10/Nov/2023</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="bi bi-gear"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle"></i> Detalles</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-shield-check"></i> Desbloquear</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer bg-white">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination pagination-sm justify-content-center mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Sección Configuración -->
+<div id="configuracion" class="content-section">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Menú lateral de configuración -->
+            <div class="col-md-3">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Menú de Configuración</h5>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#config-general" class="list-group-item list-group-item-action active" data-bs-toggle="list">
+                            <i class="bi bi-gear me-2"></i> General
+                        </a>
+                        <a href="#config-red" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="bi bi-router me-2"></i> Red
+                        </a>
+                        <a href="#config-seguridad" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="bi bi-shield-lock me-2"></i> Seguridad
+                        </a>
+                        <a href="#config-notificaciones" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="bi bi-bell me-2"></i> Notificaciones
+                        </a>
+                        <a href="#config-usuarios" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="bi bi-people me-2"></i> Usuarios
+                        </a>
+                        <a href="#config-backup" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="bi bi-cloud-arrow-down me-2"></i> Backup
+                        </a>
+                        <a href="#config-avanzada" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                            <i class="bi bi-tools me-2"></i> Avanzada
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <button class="btn btn-primary me-2">
+                            <i class="bi bi-save"></i> Guardar Cambios
+                        </button>
+                        <button class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-counterclockwise"></i> Restablecer
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contenido de configuración -->
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <!-- Configuración General -->
+                    <div class="tab-pane fade show active" id="config-general">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0"><i class="bi bi-gear me-2"></i> Configuración General</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="systemName" class="form-label">Nombre del Sistema</label>
+                                            <input type="text" class="form-control" id="systemName" value="Sistema de Monitoreo">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="timezone" class="form-label">Zona Horaria</label>
+                                            <select class="form-select" id="timezone">
+                                                <option selected>(UTC-05:00) Lima, Bogotá, Quito</option>
+                                                <option>(UTC-06:00) Ciudad de México</option>
+                                                <option>(UTC-03:00) Buenos Aires</option>
+                                                <option>(UTC-04:00) Santiago</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="language" class="form-label">Idioma</label>
+                                            <select class="form-select" id="language">
+                                                <option selected>Español</option>
+                                                <option>English</option>
+                                                <option>Português</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="dateFormat" class="form-label">Formato de Fecha</label>
+                                            <select class="form-select" id="dateFormat">
+                                                <option selected>DD/MM/YYYY</option>
+                                                <option>MM/DD/YYYY</option>
+                                                <option>YYYY-MM-DD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="systemLogo" class="form-label">Logo del Sistema</label>
+                                        <input class="form-control" type="file" id="systemLogo">
+                                        <div class="form-text">Tamaño máximo: 2MB. Formatos: PNG, JPG</div>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="darkMode" checked>
+                                        <label class="form-check-label" for="darkMode">Modo Oscuro</label>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="notificationsEnabled" checked>
+                                        <label class="form-check-label" for="notificationsEnabled">Notificaciones habilitadas</label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Configuración de Red -->
+                    <div class="tab-pane fade" id="config-red">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0"><i class="bi bi-router me-2"></i> Configuración de Red</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="ipRange" class="form-label">Rango de IP</label>
+                                            <input type="text" class="form-control" id="ipRange" placeholder="Ej: 192.168.1.1-192.168.1.254">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="subnetMask" class="form-label">Máscara de Subred</label>
+                                            <input type="text" class="form-control" id="subnetMask" value="255.255.255.0">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="gateway" class="form-label">Puerta de Enlace</label>
+                                            <input type="text" class="form-control" id="gateway" value="192.168.1.1">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="dnsServer" class="form-label">Servidor DNS</label>
+                                            <input type="text" class="form-control" id="dnsServer" value="8.8.8.8">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="scanInterval" class="form-label">Intervalo de Escaneo (minutos)</label>
+                                        <input type="number" class="form-control" id="scanInterval" value="5" min="1" max="60">
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="autoDiscovery" checked>
+                                        <label class="form-check-label" for="autoDiscovery">Descubrimiento automático de dispositivos</label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Configuración de Seguridad -->
+                    <div class="tab-pane fade" id="config-seguridad">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0"><i class="bi bi-shield-lock me-2"></i> Configuración de Seguridad</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="passwordPolicy" class="form-label">Política de Contraseñas</label>
+                                        <select class="form-select" id="passwordPolicy">
+                                            <option selected>Media (8 caracteres, mayúsculas y números)</option>
+                                            <option>Baja (6 caracteres mínimo)</option>
+                                            <option>Alta (12 caracteres, complejidad requerida)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                                        <label class="form-check-label" for="twoFactorAuth">Autenticación de Dos Factores</label>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="autoBlock" checked>
+                                        <label class="form-check-label" for="autoBlock">Bloqueo automático después de 3 intentos fallidos</label>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="sessionTimeout" class="form-label">Tiempo de espera de sesión (minutos)</label>
+                                        <input type="number" class="form-control" id="sessionTimeout" value="30" min="5" max="1440">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="firewallRules" class="form-label">Reglas de Firewall</label>
+                                        <textarea class="form-control" id="firewallRules" rows="4" placeholder="Ingrese las reglas de firewall..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Configuración de Notificaciones -->
+                    <div class="tab-pane fade" id="config-notificaciones">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0"><i class="bi bi-bell me-2"></i> Configuración de Notificaciones</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <h6 class="mb-3">Alertas por Correo Electrónico</h6>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="smtpServer" class="form-label">Servidor SMTP</label>
+                                            <input type="text" class="form-control" id="smtpServer" placeholder="smtp.tudominio.com">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="smtpPort" class="form-label">Puerto</label>
+                                            <input type="number" class="form-control" id="smtpPort" value="587">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="emailFrom" class="form-label">Email de Envío</label>
+                                            <input type="email" class="form-control" id="emailFrom" placeholder="no-reply@tudominio.com">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="emailPassword" class="form-label">Contraseña</label>
+                                            <input type="password" class="form-control" id="emailPassword">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="sslEnabled" checked>
+                                        <label class="form-check-label" for="sslEnabled">Usar SSL/TLS</label>
+                                    </div>
+                                    
+                                    <hr class="my-4">
+                                    
+                                    <h6 class="mb-3">Tipos de Notificaciones</h6>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifyNewDevice" checked>
+                                        <label class="form-check-label" for="notifyNewDevice">Nuevos dispositivos en la red</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifyBlocked" checked>
+                                        <label class="form-check-label" for="notifyBlocked">Intentos de acceso bloqueados</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifySecurity">
+                                        <label class="form-check-label" for="notifySecurity">Alertas de seguridad</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifyUpdates" checked>
+                                        <label class="form-check-label" for="notifyUpdates">Actualizaciones del sistema</label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Configuración de Usuarios -->
+                    <div class="tab-pane fade" id="config-usuarios">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0"><i class="bi bi-people me-2"></i> Administración de Usuarios</h5>
+                                <button class="btn btn-sm btn-primary">
+                                    <i class="bi bi-plus-circle"></i> Nuevo Usuario
+                                </button>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Usuario</th>
+                                                <th>Nombre</th>
+                                                <th>Rol</th>
+                                                <th>Último Acceso</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>admin</td>
+                                                <td>Administrador</td>
+                                                <td><span class="badge bg-primary">Administrador</span></td>
+                                                <td>Hace 15 min</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-secondary me-1">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>jperez</td>
+                                                <td>Juan Pérez</td>
+                                                <td><span class="badge bg-info">Supervisor</span></td>
+                                                <td>Ayer, 14:32</td>
+                                                <td><span class="badge bg-success">Activo</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-secondary me-1">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>mgonzalez</td>
+                                                <td>María González</td>
+                                                <td><span class="badge bg-secondary">Operador</span></td>
+                                                <td>10/Nov/2023</td>
+                                                <td><span class="badge bg-warning">Inactivo</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-secondary me-1">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Configuración de Backup -->
+                    <div class="tab-pane fade" id="config-backup">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0"><i class="bi bi-cloud-arrow-down me-2"></i> Configuración de Backup</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="autoBackup" checked>
+                                        <label class="form-check-label" for="autoBackup">Backup automático</label>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="backupFrequency" class="form-label">Frecuencia</label>
+                                            <select class="form-select" id="backupFrequency">
+                                                <option selected>Diario</option>
+                                                <option>Semanal</option>
+                                                <option>Mensual</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="backupTime" class="form-label">Hora de Backup</label>
+                                            <input type="time" class="form-control" id="backupTime" value="02:00">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="backupLocation" class="form-label">Ubicación del Backup</label>
+                                        <select class="form-select" id="backupLocation">
+                                            <option selected>Servidor Local</option>
+                                            <option>Google Drive</option>
+                                            <option>Dropbox</option>
+                                            <option>Amazon S3</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="backupRetention" class="form-label">Retención (días)</label>
+                                        <input type="number" class="form-control" id="backupRetention" value="30" min="1" max="365">
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <button class="btn btn-outline-primary">
+                                            <i class="bi bi-cloud-arrow-up"></i> Realizar Backup Ahora
+                                        </button>
+                                        <button class="btn btn-outline-secondary">
+                                            <i class="bi bi-cloud-arrow-down"></i> Restaurar Backup
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Configuración Avanzada -->
+                    <div class="tab-pane fade" id="config-avanzada">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0"><i class="bi bi-tools me-2"></i> Configuración Avanzada</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="alert alert-warning mb-4">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> Estas configuraciones son para usuarios avanzados. 
+                                        Cambios incorrectos pueden afectar el funcionamiento del sistema.
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="logLevel" class="form-label">Nivel de Log</label>
+                                        <select class="form-select" id="logLevel">
+                                            <option selected>Normal</option>
+                                            <option>Detallado</option>
+                                            <option>Depuración</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="apiSettings" class="form-label">Configuración de API</label>
+                                        <textarea class="form-control" id="apiSettings" rows="3">{
+  "enabled": true,
+  "port": 8080,
+  "cors": true
+}</textarea>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="maintenanceMode">
+                                        <label class="form-check-label" for="maintenanceMode">Modo Mantenimiento</label>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="customScripts" class="form-label">Scripts Personalizados</label>
+                                        <textarea class="form-control font-monospace" id="customScripts" rows="5" placeholder="// Ingrese scripts personalizados aquí..."></textarea>
+                                    </div>
+                                    
+                                    <button class="btn btn-danger">
+                                        <i class="bi bi-arrow-counterclockwise"></i> Restablecer Configuraciones
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Sección Lista Negra -->
+<div id="lista-negra" class="content-section">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="page-title">Lista Negra de Dispositivos y Sitios</h4>
+            <div class="d-flex">
+                <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#agregarListaNegraModal">
+                    <i class="bi bi-plus-circle"></i> Agregar a Lista Negra
+                </button>
+                <button class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-download"></i> Exportar
+                </button>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="metric-card bg-danger text-white">
+                    <div class="metric-value" id="total-blacklist">0</div>
+                    <div class="metric-label">Elementos en Lista Negra</div>
+                    <div class="metric-change positive">
+                        <i class="bi bi-arrow-up"></i> <span id="blacklist-trend">0</span>%
+                    </div>
+                    <i class="bi bi-shield-lock metric-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card bg-warning text-dark">
+                    <div class="metric-value" id="blocked-attempts">0</div>
+                    <div class="metric-label">Intentos Bloqueados</div>
+                    <div class="metric-change positive">
+                        <i class="bi bi-arrow-up"></i> <span id="attempts-trend">0</span>%
+                    </div>
+                    <i class="bi bi-shield-exclamation metric-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card bg-info text-white">
+                    <div class="metric-value" id="devices-blacklist">0</div>
+                    <div class="metric-label">Dispositivos Bloqueados</div>
+                    <div class="metric-change negative">
+                        <i class="bi bi-arrow-down"></i> <span id="devices-trend">0</span>%
+                    </div>
+                    <i class="bi bi-pc-display metric-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card bg-dark text-white">
+                    <div class="metric-value" id="websites-blacklist">0</div>
+                    <div class="metric-label">Sitios Web Bloqueados</div>
+                    <div class="metric-change positive">
+                        <i class="bi bi-arrow-up"></i> <span id="websites-trend">0</span>%
+                    </div>
+                    <i class="bi bi-globe metric-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Reglas de Bloqueo</h5>
+                <div class="input-group" style="width: 300px;">
+                    <input type="text" class="form-control form-control-sm" placeholder="Buscar en lista negra...">
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Elemento</th>
+                                <th>Razón</th>
+                                <th>Fecha Bloqueo</th>
+                                <th>Bloqueado Por</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-dark"><i class="bi bi-globe"></i> Sitio Web</span></td>
+                                <td>redsocialprohibida.com</td>
+                                <td>Red social no permitida</td>
+                                <td>15/Nov/2023</td>
+                                <td>admin</td>
+                                <td><span class="badge bg-danger">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary me-1" title="Editar">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success me-1" title="Desbloquear">
+                                        <i class="bi bi-shield-check"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-info"><i class="bi bi-pc-display"></i> Dispositivo</span></td>
+                                <td>00:1A:2B:3C:4D:62 (WS-Admin)</td>
+                                <td>Intento de acceso no autorizado</td>
+                                <td>14/Nov/2023</td>
+                                <td>admin</td>
+                                <td><span class="badge bg-danger">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary me-1">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success me-1">
+                                        <i class="bi bi-shield-check"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-dark"><i class="bi bi-globe"></i> Sitio Web</span></td>
+                                <td>juegosonline.com</td>
+                                <td>Sitio de juegos no permitido</td>
+                                <td>10/Nov/2023</td>
+                                <td>jperez</td>
+                                <td><span class="badge bg-success">Inactivo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary me-1">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success me-1">
+                                        <i class="bi bi-shield-check"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-info"><i class="bi bi-phone"></i> Dispositivo</span></td>
+                                <td>00:1A:2B:3C:4D:5F (BYOD-User23)</td>
+                                <td>Dispositivo personal no autorizado</td>
+                                <td>08/Nov/2023</td>
+                                <td>admin</td>
+                                <td><span class="badge bg-success">Inactivo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary me-1">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success me-1">
+                                        <i class="bi bi-shield-check"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-dark"><i class="bi bi-globe"></i> Sitio Web</span></td>
+                                <td>streamingnoautorizado.com</td>
+                                <td>Contenido no apropiado</td>
+                                <td>05/Nov/2023</td>
+                                <td>admin</td>
+                                <td><span class="badge bg-danger">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary me-1">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success me-1">
+                                        <i class="bi bi-shield-check"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer bg-white">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination pagination-sm justify-content-center mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Categorías de Sitios Bloqueados</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="categoriesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Tipos de Dispositivos Bloqueados</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="devicesBlockedChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar a lista negra -->
+    <div class="modal fade" id="agregarListaNegraModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar a Lista Negra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="blacklistForm">
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Bloqueo</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipoBloqueo" id="sitioWeb" value="sitio" checked>
+                                <label class="form-check-label" for="sitioWeb">
+                                    Sitio Web
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipoBloqueo" id="dispositivo" value="dispositivo">
+                                <label class="form-check-label" for="dispositivo">
+                                    Dispositivo
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipoBloqueo" id="palabraClave" value="palabra">
+                                <label class="form-check-label" for="palabraClave">
+                                    Palabra Clave
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3" id="sitioWebGroup">
+                            <label for="urlSitio" class="form-label">URL del Sitio</label>
+                            <input type="text" class="form-control" id="urlSitio" placeholder="Ej: ejemplo.com">
+                            <div class="form-text">No incluir https:// o http://</div>
+                        </div>
+
+                        <div class="mb-3 d-none" id="dispositivoGroup">
+                            <label for="dispositivoSelect" class="form-label">Seleccionar Dispositivo</label>
+                            <select class="form-select" id="dispositivoSelect">
+                                <option selected>Seleccione un dispositivo</option>
+                                <option value="00:1A:2B:3C:4D:5E">WS-1042 (00:1A:2B:3C:4D:5E)</option>
+                                <option value="00:1A:2B:3C:4D:5F">BYOD-User23 (00:1A:2B:3C:4D:5F)</option>
+                                <option value="00:1A:2B:3C:4D:60">SRV-MKT-01 (00:1A:2B:3C:4D:60)</option>
+                                <option value="00:1A:2B:3C:4D:61">TAB-Executive (00:1A:2B:3C:4D:61)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 d-none" id="palabraClaveGroup">
+                            <label for="palabraClave" class="form-label">Palabra Clave</label>
+                            <input type="text" class="form-control" id="palabraClave" placeholder="Ej: juego, apuesta, etc.">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="razonBloqueo" class="form-label">Razón del Bloqueo</label>
+                            <select class="form-select" id="razonBloqueo">
+                                <option selected>Seleccione una razón</option>
+                                <option>Redes sociales no permitidas</option>
+                                <option>Sitios de juegos/apuestas</option>
+                                <option>Contenido inapropiado</option>
+                                <option>Seguridad/Phishing</option>
+                                <option>Productividad</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="comentarios" class="form-label">Comentarios (Opcional)</label>
+                            <textarea class="form-control" id="comentarios" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="bloqueoInmediato" checked>
+                            <label class="form-check-label" for="bloqueoInmediato">Aplicar bloqueo inmediatamente</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Agregar a Lista Negra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
